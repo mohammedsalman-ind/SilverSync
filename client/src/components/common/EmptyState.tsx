@@ -30,9 +30,9 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
       <div style={{ fontSize: '3rem', marginBottom: '12px' }} aria-hidden="true">
         {icon}
       </div>
-      <h3 style={{ fontSize: '1.2rem', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '6px' }}>
+      <h2 style={{ fontSize: '1.25rem', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '6px' }}>
         {title}
-      </h3>
+      </h2>
       <p style={{ color: 'var(--text-muted)', maxWidth: '420px', margin: '0 auto 20px', fontSize: '0.95rem' }}>
         {description}
       </p>

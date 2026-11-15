@@ -5,8 +5,11 @@
   },
   "nav": {
     "dashboard": "Dashboard",
+    "today": "Today's Doses",
     "medicines": "Medicines",
-    "appointments": "Appointments",
+    "stock": "Stock Tracker",
+    "adherence": "Adherence",
+    "approvals": "Approvals",
     "circle": "Care Circle",
     "seniorMode": "Senior Mode",
     "logout": "Log Out"
@@ -28,6 +31,67 @@
     "googleSignIn": "Continue with Google",
     "noAccount": "Don't have an account? Sign up",
     "hasAccount": "Already have an account? Sign in"
+  },
+  "medicines": {
+    "title": "Medications",
+    "subtitle": "Daily prescription schedules and stock management",
+    "addBtn": "Add Medication",
+    "proposeBtn": "Propose New Medication",
+    "refillBtn": "Refill Stock",
+    "name": "Medicine Name",
+    "dosage": "Dosage (e.g. 500mg, 1 tablet)",
+    "form": "Form (Tablet, Syrup, Injection, etc.)",
+    "times": "Daily Times (HH:mm)",
+    "asNeeded": "As Needed (PRN)",
+    "quantityRemaining": "Quantity in Stock",
+    "threshold": "Refill Alert Threshold (Days)",
+    "daysLeft": "Days Left",
+    "runOutDate": "Estimated Run-Out",
+    "proposeNotice": "As a family member or caregiver, your proposed medication changes require Elder approval before taking effect."
+  },
+  "today": {
+    "title": "Today's Medication Schedule",
+    "subtitle": "Tap Taken or Skip to log your routine",
+    "taken": "TAKEN",
+    "skip": "SKIP",
+    "statusTaken": "Taken",
+    "statusMissed": "Missed",
+    "statusSkipped": "Skipped",
+    "statusPending": "Scheduled",
+    "noDosesToday": "No scheduled doses for today. Keep up the great health routine!"
+  },
+  "stock": {
+    "title": "Medicine Stock & Refill Tracker",
+    "subtitle": "Automatic stock decrement upon taking doses and multi-tier refill alerts",
+    "lowStockWarning": "Low Stock Warning: Some medicines have fewer than 7 days of supply remaining.",
+    "addQuantity": "Add Quantity",
+    "quickAdd30": "+30 Tablets",
+    "quickAdd60": "+60 Tablets"
+  },
+  "adherence": {
+    "title": "Adherence Analytics",
+    "subtitle": "Routine consistency tracking over 7 and 30 days",
+    "sevenDay": "7-Day Adherence",
+    "thirtyDay": "30-Day Adherence",
+    "currentStreak": "Current Streak",
+    "days": "Days",
+    "chartTitle": "Daily Dose Adherence Chart",
+    "tableTitle": "Accessible Daily Breakdown Table",
+    "date": "Date",
+    "scheduled": "Scheduled",
+    "taken": "Taken",
+    "missed": "Missed",
+    "skipped": "Skipped",
+    "rate": "Adherence Rate"
+  },
+  "approvals": {
+    "title": "Pending Elder Approvals",
+    "subtitle": "Changes proposed by family members or caregivers awaiting your confirmation",
+    "noProposals": "No pending proposals. All medications are up to date!",
+    "proposedBy": "Proposed by",
+    "type": "Change Type",
+    "approve": "Approve Change",
+    "reject": "Reject Change"
   },
   "circle": {
     "title": "Care Circle",

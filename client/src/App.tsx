@@ -13,6 +13,21 @@ const Signup = lazy(() =>
 const Dashboard = lazy(() =>
   import('./pages/Dashboard').then((m) => ({ default: m.Dashboard }))
 );
+const TodayDoses = lazy(() =>
+  import('./pages/TodayDoses').then((m) => ({ default: m.TodayDoses }))
+);
+const Medicines = lazy(() =>
+  import('./pages/Medicines').then((m) => ({ default: m.Medicines }))
+);
+const StockView = lazy(() =>
+  import('./pages/StockView').then((m) => ({ default: m.StockView }))
+);
+const Adherence = lazy(() =>
+  import('./pages/Adherence').then((m) => ({ default: m.Adherence }))
+);
+const PendingApprovals = lazy(() =>
+  import('./pages/PendingApprovals').then((m) => ({ default: m.PendingApprovals }))
+);
 const CareCircle = lazy(() =>
   import('./pages/CareCircle').then((m) => ({ default: m.CareCircle }))
 );
@@ -64,6 +79,46 @@ const AppRoutes: React.FC = () => {
               element={
                 <ProtectedRoute>
                   <Dashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/today"
+              element={
+                <ProtectedRoute>
+                  <TodayDoses />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/medicines"
+              element={
+                <ProtectedRoute>
+                  <Medicines />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/stock"
+              element={
+                <ProtectedRoute>
+                  <StockView />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/adherence"
+              element={
+                <ProtectedRoute>
+                  <Adherence />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/approvals"
+              element={
+                <ProtectedRoute>
+                  <PendingApprovals />
                 </ProtectedRoute>
               }
             />
