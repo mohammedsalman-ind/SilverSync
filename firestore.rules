@@ -1,0 +1,121 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(uid) {
+      return isAuthenticated() && request.auth.uid == uid;
+    }
+
+    function getMemberData(circleId) {
+      return get(/databases/$(database)/documents/careCircles/$(circleId)/members/$(request.auth.uid)).data;
+    }
+
+    function isCircleMember(circleId) {
+      return isAuthenticated() &&
+        exists(/databases/$(database)/documents/careCircles/$(circleId)/members/$(request.auth.uid)) &&
+        getMemberData(circleId).status == 'active';
+    }
+
+    function isElder(circleId) {
+      return isAuthenticated() &&
+        exists(/databases/$(database)/documents/careCircles/$(circleId)/members/$(request.auth.uid)) &&
+        getMemberData(circleId).status == 'active' &&
+        getMemberData(circleId).role == 'ELDER';
+    }
+
+    function hasPermission(circleId, permission) {
+      return isCircleMember(circleId) && (
+        getMemberData(circleId).role == 'ELDER' ||
+        (getMemberData(circleId).permissions != null && permission in getMemberData(circleId).permissions)
+      );
+    }
+
+    // Users collection: users can read & manage their own profile
+    match /users/{uid} {
+      allow read, write: if isOwner(uid);
+    }
+
+    // CareCircles collection
+    match /careCircles/{circleId} {
+      // Circle can be read by its active members
+      allow read: if isCircleMember(circleId);
+      // Circle can be created by authenticated users
+      allow create: if isAuthenticated() && request.resource.data.elderUid == request.auth.uid;
+      // Only elder can update or delete circle metadata
+      allow update, delete: if isElder(circleId);
+
+      // Care circle members subcollection
+      match /members/{memberUid} {
+        // Members can read list of members in their circle
+        allow read: if isCircleMember(circleId);
+        // Member can be added or updated only by elder or backend admin
+        allow write: if isElder(circleId);
+      }
+
+      // Invites subcollection: managed server-side, but elder can view invite records
+      match /invites/{inviteId} {
+        allow read: if isElder(circleId);
+        allow write: if isElder(circleId);
+      }
+    }
+
+    // Medicines collection
+    match /medicines/{medId} {
+      allow read: if isCircleMember(resource.data.circleId);
+      allow create: if hasPermission(request.resource.data.circleId, 'manage_medicines');
+      allow update, delete: if hasPermission(resource.data.circleId, 'manage_medicines');
+    }
+
+    // Dose logs collection
+    match /doseLogs/{logId} {
+      allow read: if isCircleMember(resource.data.circleId);
+      allow create: if isCircleMember(request.resource.data.circleId);
+      allow update: if isCircleMember(resource.data.circleId);
+    }
+
+    // Proposed changes collection (elder-approval workflow)
+    match /proposedChanges/{changeId} {
+      allow read: if isCircleMember(resource.data.circleId);
+      allow create: if isCircleMember(request.resource.data.circleId);
+      allow update, delete: if isElder(resource.data.circleId);
+    }
+
+    // Appointments collection
+    match /appointments/{appId} {
+      allow read: if isCircleMember(resource.data.circleId);
+      allow create: if hasPermission(request.resource.data.circleId, 'manage_appointments');
+      allow update, delete: if hasPermission(resource.data.circleId, 'manage_appointments');
+
+      match /checklist/{itemId} {
+        allow read, write: if isCircleMember(get(/databases/$(database)/documents/appointments/$(appId)).data.circleId);
+      }
+      match /questions/{qId} {
+        allow read, write: if isCircleMember(get(/databases/$(database)/documents/appointments/$(appId)).data.circleId);
+      }
+      match /notes/{noteId} {
+        allow read, write: if isCircleMember(get(/databases/$(database)/documents/appointments/$(appId)).data.circleId);
+      }
+    }
+
+    // Server-managed collections (Notification log, Job locks, SOS events, AI cache)
+    match /notificationLog/{dedupeKey} {
+      allow read, write: if false; // server-side Admin SDK only
+    }
+    match /jobLocks/{jobName} {
+      allow read, write: if false; // server-side Admin SDK only
+    }
+    match /aiCache/{hash} {
+      allow read, write: if false; // server-side Admin SDK only
+    }
+    match /sosEvents/{eventId} {
+      allow read: if isCircleMember(resource.data.circleId);
+      allow create: if isCircleMember(request.resource.data.circleId);
+      allow update, delete: if false;
+    }
+  }
+}

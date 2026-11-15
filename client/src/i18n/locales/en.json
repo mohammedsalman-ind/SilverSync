@@ -1,0 +1,63 @@
+{
+  "app": {
+    "title": "SilverSync",
+    "tagline": "Elderly Care & Medication Management"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "medicines": "Medicines",
+    "appointments": "Appointments",
+    "circle": "Care Circle",
+    "seniorMode": "Senior Mode",
+    "logout": "Log Out"
+  },
+  "auth": {
+    "loginTitle": "Welcome Back to SilverSync",
+    "loginSubtitle": "Sign in to manage medications and care schedules",
+    "signupTitle": "Create your SilverSync Account",
+    "signupSubtitle": "Elderly-centred care, accessible and collaborative",
+    "emailLabel": "Email Address",
+    "passwordLabel": "Password",
+    "nameLabel": "Full Name",
+    "roleLabel": "I am signing up as:",
+    "roleElder": "Elder (I own my care profile)",
+    "roleFamily": "Family Member (Helping remotely)",
+    "roleCaregiver": "Caregiver (Assisting with routine)",
+    "signInBtn": "Sign In",
+    "signUpBtn": "Create Account",
+    "googleSignIn": "Continue with Google",
+    "noAccount": "Don't have an account? Sign up",
+    "hasAccount": "Already have an account? Sign in"
+  },
+  "circle": {
+    "title": "Care Circle",
+    "subtitle": "Elder-controlled family and caretaker permissions",
+    "createCircle": "Create Care Circle",
+    "circleName": "Circle Name (e.g., Mom's Care Circle)",
+    "inviteMember": "Invite Someone",
+    "inviteModalTitle": "Invite a Family Member or Caregiver",
+    "inviteInstructions": "Share this 8-character passcode. It expires in 24 hours and can only be used once. When they enter the code, you will approve their access.",
+    "joinCircle": "Join a Care Circle",
+    "enterCode": "Enter 8-Character Invite Code",
+    "joinBtn": "Request Access",
+    "pendingApprovalNotice": "Your request to join is pending approval from the Elder.",
+    "membersList": "Active Members",
+    "pendingList": "Pending Join Requests",
+    "role": "Role",
+    "permissions": "Permissions",
+    "status": "Status",
+    "approve": "Approve",
+    "reject": "Reject",
+    "revoke": "Revoke Access",
+    "noMembers": "No other members yet. Invite your family or caregiver to collaborate!"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "save": "Save Changes",
+    "cancel": "Cancel",
+    "close": "Close",
+    "copy": "Copy Code",
+    "copied": "Copied!"
+  }
+}
